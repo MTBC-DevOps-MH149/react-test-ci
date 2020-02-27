@@ -22,14 +22,7 @@ jobs: # a collection of steps
       - run: # run tests
           name: test
           command: npm run test -nowatch
-      - run: |-
-          machine api.heroku.com
-            login $HEROKU_USERNAME
-            password $HEROKU_PASSWORD
-          machine git.heroku.com
-            login $HEROKU_USERNAME
-            password $HEROKU_PASSWORD
-          EOF 
+      - run: 
        - run: heroku git:remote -a react-test-circleci
        - run: git push heroku master
 
