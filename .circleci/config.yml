@@ -1,38 +1,65 @@
-version: 2.1
+version: 2
+jobs:
+build:
+    docker:
+    # https://circleci.com/docs/2.0/circleci-images/
+    - image: circleci/node:10.10
+    - image: circleci/postgres:10.5-alpine-postgis
+        environment:
+        POSTGRES_USER: myproject
+        POSTGRES_DB: myproject
 
-orbs:
-  heroku: circleci/heroku@1.0.1 # Invoke the Heroku orb
+    working_directory: ~/repo
+
+    steps:
+    - checkout
+
+    - restore_cache:
+        keys:
+        - v1-dependencies-{{ checksum "package.json" }}
+        - v1-dependencies-
+
+    - run: npm install
+
+    ..........
+
+    - save_cache:
+        paths:
+            - node_modules
+        key: v1-dependencies-{{ checksum "package.json" }}
+
+    - run:
+        name: Unit Testing
+        command: npm run test_unit
+
+    - run:
+        name: Build client files
+        command: npm run build
+
+    - run:
+        name: API Testing
+        command: |
+            npm start &
+            npm run test_api
+
+deploy:
+    docker:
+    - image: buildpack-deps:trusty
+    steps:
+    - checkout
+    - run:
+        name: Deploy to Heroku
+        command: |
+            git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git master
 
 workflows:
-  heroku_deploy:
+version: 2
+build-deploy:
     jobs:
-      - build
-      - heroku/deploy-via-git: # Use the pre-configured job, deploy-via-git
-          requires:
+    - build
+    - deploy:
+        requires:
             - build
-          filters:
+        filters:
             branches:
-              only: sequential-branch-filter
-jobs:
-  build:
-    docker:
-      - image: circleci/node:10.16.3
-    working_directory: ~/circleci-demo-workflows
-    steps:
-      - checkout
-      - run:
-          name: update-npm
-          command: 'sudo npm install -g npm@latest'
-      - restore_cache: # special step to restore the dependency cache
-          # Read about caching dependencies: https://circleci.com/docs/2.0/caching/
-          key: dependency-cache-{{ checksum "package.json" }}
-      - run:
-          name: install-npm
-          command: npm install
-      - save_cache: # special step to save the dependency cache
-          key: dependency-cache-{{ checksum "package.json" }}
-          paths:
-            - ./node_modules
-      - run: # run tests
-          name: test
-          command: npm run test -nowatch
+            only: master
