@@ -3,13 +3,10 @@ jobs:
 build:
     docker:
     # https://circleci.com/docs/2.0/circleci-images/
-    - image: circleci/node:10.10
-    - image: circleci/postgres:10.5-alpine-postgis
-        environment:
-        POSTGRES_USER: myproject
-        POSTGRES_DB: myproject
+    - image: circleci/node:10.16.3
+     
 
-    working_directory: ~/repo
+    working_directory: ~/repository
 
     steps:
     - checkout
