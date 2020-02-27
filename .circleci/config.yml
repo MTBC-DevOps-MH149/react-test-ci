@@ -23,6 +23,6 @@ jobs: # a collection of steps
           name: test
           command: npm run test -nowatch
       - run:
-        name: Deploy to Heroku
-        command: |
+          name: Deploy to Heroku
+          command: |
             git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git master
