@@ -65,8 +65,8 @@ flip({
   duration: 200
 });
 
-document.getElementById("root").style.height = "100vh";
-document.getElementById("root").style.backgroundColor = "#333";
+//document.getElementById("root").style.height = "100vh";
+//document.getElementById("root").style.backgroundColor = "#333";
 
 const Example = () => {
   const classes = useStyles();
