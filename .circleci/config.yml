@@ -22,4 +22,17 @@ jobs: # a collection of steps
       - run: # run tests
           name: test
           command: npm run test -nowatch
-      - run: git push https:\\heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git HEAD
+      - run: |-
+          cat >~/.netrc <<EOF
+          machine api.heroku.com
+            login $HEROKU_USERNAME
+            password $HEROKU_PASSWORD
+          machine git.heroku.com
+            login $HEROKU_USERNAME
+            password $HEROKU_PASSWORD
+          EOF
+       - run: chmod 600 ~/.netrc 
+       - run: heroku git:remote -a my-app-staging
+       - run: git push heroku staging:master
+       - run: heroku run rake db:migrate --app my-app-staging
+
