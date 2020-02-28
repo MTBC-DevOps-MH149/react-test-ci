@@ -79,7 +79,65 @@ To setup CircleCI, we need to sign up and connect our GitHub account.
 Go to `Add Project` on the left sidebar.
 #### Set Up Project`
 Make sure to setup you new `react-test-circleci`
+![Image of circleci](https://miro.medium.com/max/3480/1*dW4I2XGUMSi-iE0E3nWBIQ.png)
 
 #### Configure Project ####
 Select Linux and select Node. Copy to your clipboard the config.yml file and then click Start Building.
 ![Image of circleci](https://miro.medium.com/max/3480/1*Q051UmLXj92AM_8XzpTI7g.png)
+
+#### Building
+Right away it will start building, but because there is no config.yml file yet, it’ll give an error.
+![Image of circleci](https://miro.medium.com/max/3480/1*Y3xDlRDUTRjE-gebD7KSeA.png)
+
+Next to the name of your project will be a Cog Icon, click it to be brought to the Project Settings.
+
+#### Pull Requests
+We’re to set up CircleCI to only build on Pull Requests (PRs) and our main branch master. This is to make we save on our Free account offered from CircleCI.
+In Project Settings, click Advanced Settings, and then select On for Only build pull requests.
+![Image of circleci](https://miro.medium.com/max/3480/1*eX7rfqH8s7IJboToJnZPyA.png)
+
+### Configuring Our First Test
+Now that we have everything setup, we can no create our first config.yml file in our repository.
+First, create a new folder call .circleci and place it in a file called config.yml. We’ll use this node circleci configuration as a base and but make some changes.
+File: **`/.circleci/config.yml`**
+
+```javascript
+version: 2.0 # use CircleCI 2.0
+jobs: # a collection of steps
+  build: # runs not using Workflows must have a `build` job as entry point
+    working_directory: ~/repository # our name of the directory where steps will run
+    docker: # run the steps with Docker
+      - image: circleci/node:10.16.3 # ...with this image as the primary container; this is where all `steps` will run
+    steps: # a collection of executable commands
+      - checkout # special step to check out source code to working directory
+      - run:
+          name: update-npm
+          command: 'sudo npm install -g npm@latest'
+      - restore_cache: # special step to restore the dependency cache
+          # Read about caching dependencies: https://circleci.com/docs/2.0/caching/
+          key: dependency-cache-{{ checksum "package.json" }}
+      - run:
+          name: install-npm
+          command: npm install
+      - save_cache: # special step to save the dependency cache
+          key: dependency-cache-{{ checksum "package.json" }}
+          paths:
+            - ./node_modules
+      - run: # run tests
+          name: test
+          command: npm run test-nowatch
+      - run:
+          name: Deploy to Heroku
+          command: |
+            git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git master     
+```
+
+
+#### Create A Pull Request On GitHub
+This is so that we can initiate the process for a build on CircleCI.
+
+
+
+
+
+
