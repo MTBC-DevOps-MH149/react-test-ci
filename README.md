@@ -4,7 +4,9 @@ What we’re trying to do with this tutorial is to automate our code commits bei
 
 #### Requirements : ####
 * Sign up for [CircleCI](https://circleci.com/signup/ "Named link title") using Github
+![Image of circleci](https://miro.medium.com/max/3480/1*n8k-SlyRWj5Lyhs6wJ98Pw.png)
 * Sign up for [Heroku](https://signup.heroku.com/ "Named link title") using Github.
+![Image of Heroku](https://camo.githubusercontent.com/6800a94617cea52c712f849df731b823c86c6dc9/687474703a2f2f616b697261636869782e73332e616d617a6f6e6177732e636f6d2f6c6573736f6e5f335f332f30315f6865726f6b755f7369676e75705f706167652e706e67)
 * Install [Git](https://git-scm.com/ "Named link title")in your machine.
 * NodeJS 10.16.3
 
@@ -54,9 +56,30 @@ Instead, it will copy all the configuration files and the transitive dependencie
 
 You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## Learn More
+#### Learn More
 
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
 
+## Making Repository for project on Github.
+Make new public repository in github with name `react-test-circleci`. Initialize this repository with a README.
+
+Link the folder to the repository: 
+`git remote add origin https://github.com/{youraccount}/react-test-circleci.git`
+Lastly, add, commit, and push our code:
+`git add .`
+`git commit -m "INIT: initial commit."`
+`git push origin master `
+
+## CircleCI Setup & Config
+To setup CircleCI, we need to sign up and connect our GitHub account.
+[CircleCI](https://circleci.com/signup/ "Named link title"). 
+#### Add Project
+Go to `Add Project` on the left sidebar.
+#### Set Up Project`
+Make sure to setup you new `react-test-circleci`
+
+#### Configure Project ####
+Select Linux and select Node. Copy to your clipboard the config.yml file and then click Start Building.
+![Image of circleci](https://miro.medium.com/max/3480/1*Q051UmLXj92AM_8XzpTI7g.png)
