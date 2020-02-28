@@ -11,12 +11,10 @@ deploy:
   # deploy app as api server
   - provider: heroku
     skip_cleanup: true
-    api-key:
-      secure: $HEROKU_API_KEY
-    app: react-test-ci
+    api-key: $HEROKU_API_KEY
+    app: react-test-circleci
   # deploy app as front end website
   - provider: heroku
     skip_cleanup: true
-    api-key:
-      secure: $HEROKU_API_KEY
-    app: react-test-ci
+    api-key: $HEROKU_API_KEY 
+    app: react-test-circleci
