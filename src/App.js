@@ -78,33 +78,33 @@ const Example = () => {
   };
 
   return (
-    // <Router>
-    //   <Navigation>
-    //     <Route exact path="/" transitionProps={{ ...hideInsteadOfUnmount }}>
-    //       <FeedScreen />
-    //     </Route>
+     <Router>
+       <Navigation>
+         <Route exact path="/" transitionProps={{ ...hideInsteadOfUnmount }}>
+           <FeedScreen />
+         </Route>
 
-    //     <Route exact path="/login">
-    //       <LoginScreen />
-    //     </Route>
+         <Route exact path="/login">
+           <LoginScreen />
+         </Route>
 
-    //     <Route exact path="/Register">
-    //       <RegisterScreen />
-    //     </Route>
+         <Route exact path="/Register">
+           <RegisterScreen />
+         </Route>
 
-    //     <Route exact path="/menu">
-    //       <MenuScreen />
-    //     </Route>
+         <Route exact path="/menu">
+           <MenuScreen />
+         </Route>
 
-    //     <Route exact path="/about">
-    //       <AboutScreen />
-    //     </Route>
+         <Route exact path="/about">
+           <AboutScreen />
+         </Route>
 
-    //     <Route exact path="/detail/:color">
-    //       <DetailScreen />
-    //     </Route>
-    //   </Navigation>
-    // </Router>
+         <Route exact path="/detail/:color">
+           <DetailScreen />
+         </Route>
+       </Navigation>
+     </Router>
     <>
     <h1>Salam Pakistan...........</h1>
     <h1>Welcome to the world of Software Engineers...........</h1>
