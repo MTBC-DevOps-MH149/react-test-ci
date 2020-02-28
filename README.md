@@ -1,3 +1,20 @@
+## Deploy React App To Heroku Using CircleCi
+The concept is to develop pipeline to automate Continuous Integration and Continuous Development. 
+What we’re trying to do with this tutorial is to automate our code commits being tested and automatically deployed with CircleCI.
+
+#### Requirements : ####
+* Sign up for [CircleCI](https://circleci.com/signup/ "Named link title") using Github
+* Sign up for [Heroku](https://signup.heroku.com/ "Named link title") using Github.
+* Install [Git](https://git-scm.com/ "Named link title")in your machine.
+* NodeJS 10.16.3
+
+### Create React App ###
+Let’s get started! We’re going to start by doing the basic the create-react-app:
+#### ` npx create-react-app react-test-circleci `
+
+#### Clone this repository or add some React App code for testing purpose. ####
+In the project directory, you can run for intial testing purposes:
+#### ` npm start` 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
@@ -43,26 +60,3 @@ You can learn more in the [Create React App documentation](https://facebook.gith
 
 To learn React, check out the [React documentation](https://reactjs.org/).
 
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
